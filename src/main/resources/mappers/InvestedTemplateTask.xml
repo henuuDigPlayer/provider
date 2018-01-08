@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lindj.mapper.InvestedTemplateTaskMapper" >
+    <resultMap id="BaseResultMap" type="com.lindj.model.InvestedTemplateTask" >
+        <id column="id" property="id" />
+        <result column="triger_name" property="trigerName" />
+        <result column="job_name" property="jobName"/>
+        <result column="class_name" property="className"/>
+        <result column="method_name" property="methodName"/>
+        <result column="cron" property="cron"/>
+        <result column="status" property="status"/>
+        <result column="concurrent" property="concurrent"/>
+        <result column="remark" property="remark"/>
+        <result column="reserve" property="reserve"/>
+    </resultMap>
+
+    <sql id="allColumns" >
+        id, triger_name,job_name,class_name,method_name,cron,status,concurrent,remark,reserve
+    </sql>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select <include refid="allColumns"/> from invested_template_task
+    </select>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.lindj.model.InvestedTemplateTask" useGeneratedKeys="true">
+        insert into invested_template_task (triger_name, job_name, class_name,
+        method_name, cron, status,
+        concurrent, remark, reserve
+        )
+        values (#{trigerName,jdbcType=VARCHAR}, #{jobName,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR},
+        #{methodName,jdbcType=VARCHAR}, #{cron,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+        #{concurrent,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{reserve,jdbcType=VARCHAR}
+        )
+    </insert>
+</mapper>
