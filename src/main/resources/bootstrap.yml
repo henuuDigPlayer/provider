@@ -8,7 +8,15 @@ spring:
         serviceId: config-server
       name: provider-lindj
       label: master
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: root
+    password: lindj
 eureka:
   client:
     serviceUrl:
       defaultZone: http://192.168.1.41:8000/eureka/
+management:
+  security:
+     enabled: false
