@@ -1,8 +1,8 @@
 package com.lindj.controller;
 
+import com.lindj.config.ConfigParams;
 import com.lindj.service.InvestedTemplateTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/task")
 @RefreshScope
 public class InvestedTemplateTaskController {
-    @Value("${url.length}")
-    private Integer port;
+
+    @Autowired
+    private ConfigParams configParams;
+
     @Autowired
     private InvestedTemplateTaskService templateTaskService;
 
@@ -26,8 +28,8 @@ public class InvestedTemplateTaskController {
         return this.templateTaskService.selectAll();
     }
 
-    @RequestMapping(value = "/getUrlLength", method = RequestMethod.GET)
-    public Object getPort(){
-        return this.port;
+    @RequestMapping(value = "/getLength", method = RequestMethod.GET)
+    public Object getLength(){
+        return this.configParams.getLength();
     }
 }
